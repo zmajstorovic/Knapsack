@@ -23,7 +23,7 @@ def branch_and_bound(values, weights, capacities):
     start = timer()
     result = solver.Solve()
     end = timer()
-    print('Duration: {}'.format(end-start))
+    print('B&B||Duration: {}'.format(end-start))
     output(result, solver, values, weights)
 
 def dynamic(values, weights, capacities):
@@ -33,7 +33,7 @@ def dynamic(values, weights, capacities):
     start = timer()
     result = solver.Solve()
     end = timer()
-    print('Duration: {}'.format(end - start))
+    print('Dynamic||Duration: {}'.format(end - start))
     output(result, solver, values, weights)
 
 
@@ -68,8 +68,8 @@ def output(computed_value, solver, values, weights):
 
 
 def main():
-    rand_values = [randint(1, 50) for p in range(0, 10000)]
-    rand_weights = [[randint(10, 100) for p in range(0, 10000)]]
+    rand_values = [randint(1, 50) for p in range(0, 100000)]
+    rand_weights = [[randint(10, 100) for p in range(0, 100000)]]
 
     values = [
         360, 83, 59, 130, 431, 67, 230, 52, 93, 125, 670, 892, 600, 38, 48, 147,
@@ -82,40 +82,12 @@ def main():
         42, 47, 52, 32, 26, 48, 55, 6, 29, 84, 2, 4, 18, 56, 7, 29, 93, 44, 71,
         3, 86, 66, 31, 65, 0, 79, 20, 65, 52, 13
     ]]
-    capacities = [10000]
+    capacities = [1256]
 
     branch_and_bound(rand_values, rand_weights, capacities)
     dynamic(rand_values, rand_weights, capacities)
     greedy(rand_values, rand_weights, capacities)
 
-    # Create the solver.
-    # solver = pywrapknapsack_solver.KnapsackSolver(
-    #     pywrapknapsack_solver.KnapsackSolver.
-    #     KNAPSACK_MULTIDIMENSION_BRANCH_AND_BOUND_SOLVER, 'KnapsackExample')
-    #
-    # solver.Init(values, weights, capacities)
-    # start_time = datetime.now()
-    # computed_value = solver.Solve()
-    # end_time = datetime.now()
-    #
-    # output(computed_value, solver, values, weights)
-    # print('Duration: {}'.format(end_time - start_time))
-    # packed_items = []
-    # packed_weights = []
-    # total_weight = 0
-    #
-    # print('Total value =', computed_value)
-    # for i in range(len(values)):
-    #     if solver.BestSolutionContains(i):
-    #         packed_items.append(i)
-    #         packed_weights.append(weights[0][i])
-    #         total_weight += weights[0][i]
-    # print('Total weight:', total_weight)
-    # print('Packed items:', packed_items)
-    # print('Packed_weights:', packed_weights)
-    #
-    # branch_and_bound(values, weights, capacities)
-    # dynamic(values, weights, capacities)
 
 
 if __name__ == '__main__':
